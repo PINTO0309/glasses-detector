@@ -21,3 +21,4 @@ _templates
 __pycache__
 *.egg-info
 *.mp4
+outputs/
