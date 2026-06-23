@@ -36,7 +36,7 @@ $\color{gray}{\textit{Note: }\text{refer to}}$ [Glasses Detector Features](https
 ## Installation
 
 > [!IMPORTANT]
-> Minimum version of [Python 3.12](https://www.python.org/downloads/release/python-3120/) is **REQUIRED**. Also, you may want to install [Pytorch](https://pytorch.org/get-started/locally/) in advance to select specific configuration for your device and environment.
+> Python 3.12.x is **REQUIRED**. Also, you may want to install [Pytorch](https://pytorch.org/get-started/locally/) in advance to select specific configuration for your device and environment.
 
 ### Pip Package
 
@@ -46,7 +46,27 @@ If you only need the library with pre-trained models, just install the [pip pack
 pip install glasses-detector
 ```
 
-You can also install it from the source:
+You can also install it from the source with [uv](https://docs.astral.sh/uv/):
+
+```bash
+git clone https://github.com/mantasu/glasses-detector
+cd glasses-detector && uv sync
+```
+
+You can include training and preprocessing dependencies with:
+
+```bash
+uv sync --group train
+```
+
+You can export all supported pre-trained models to simplified ONNX with:
+
+```bash
+uv sync --group export
+uv run --group export python scripts/export_onnx.py
+```
+
+The legacy pip flow is still supported:
 
 ```bash
 git clone https://github.com/mantasu/glasses-detector
@@ -59,7 +79,7 @@ If you want to train your own models on the given datasets (or on some other dat
 
 ```bash
 git clone https://github.com/mantasu/glasses-detector
-cd glasses-detector && pip install -r requirements.txt
+cd glasses-detector && uv sync --group train
 ```
 
 You can create a virtual environment for your packages via [venv](https://docs.python.org/3/library/venv.html), however, if you have conda, then you can simply use it to create a new environment, for example:

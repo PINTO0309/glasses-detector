@@ -5,9 +5,13 @@ data/*
 # Training
 checkpoints
 lightning_logs
+onnx
 
 # IDE
 .vscode
+
+# Environment
+.venv
 
 # Build
 dist

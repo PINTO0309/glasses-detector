@@ -1,18 +1,18 @@
 :fas:`download` Installation
 ============================
 
-The packages requires at least `Python 3.12 <https://www.python.org/downloads/release/python-3120/>`_. To install the package via `pip <https://pypi.org/project/pip/>`_, simply run:
+The package requires Python 3.12.x. To install the package via `pip <https://pypi.org/project/pip/>`_, simply run:
 
 .. code-block:: bash
 
     pip install glasses-detector
 
-Or, to install it from source, run:
+Or, to install it from source with `uv <https://docs.astral.sh/uv/>`_, run:
 
 .. code-block:: bash
 
     git clone https://github.com/mantasu/glasses-detector
-    cd glasses-detector && pip install .
+    cd glasses-detector && uv sync
 
 .. tip::
 

@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glasses-detector"
+version = "1.0.4"
+description = "Glasses classification, detection, and segmentation."
+readme = "README.md"
+requires-python = "==3.12.*"
+license = "MIT"
+authors = [
+    { name = "Mantas Birskus", email = "mantix7@gmail.com" },
+]
+keywords = [
+    "binary",
+    "classification",
+    "computer-vision",
+    "cuda",
+    "detection",
+    "eyeglasses",
+    "face",
+    "glasses",
+    "gpu",
+    "image",
+    "pytorch",
+    "segmentation",
+    "sunglasses",
+    "torchvision",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Environment :: GPU :: NVIDIA CUDA :: 12",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+]
+dependencies = [
+    "numpy==2.5.0",
+    "pillow==12.2.0",
+    "torch==2.12.1",
+    "torchvision==0.27.1",
+    "tqdm==4.68.3",
+]
+
+[project.urls]
+Documentation = "https://mantasu.github.io/glasses-detector"
+Repository = "https://github.com/mantasu/glasses-detector"
+"Bug Tracker" = "https://github.com/mantasu/glasses-detector/issues"
+
+[project.scripts]
+glasses-detector = "glasses_detector.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[dependency-groups]
+train = [
+    "albumentations==2.0.8",
+    "fvcore==0.1.5.post20221221",
+    "ipykernel==7.3.0",
+    "jsonargparse[signatures]==4.49.0",
+    "prettytable==3.18.0",
+    "pycocotools==2.0.11",
+    "pytorch-lightning==2.6.5",
+    "pyyaml==6.0.3",
+    "rarfile==4.2",
+    "scikit-image==0.26.0",
+    "scipy==1.18.0",
+    "tensorboard==2.20.0",
+    "torch-tb-profiler==0.4.3",
+    "torchmetrics==1.9.0",
+]
+docs = [
+    "beautifulsoup4==4.15.0",
+    "pydata-sphinx-theme==0.19.0",
+    "pyyaml==6.0.3",
+    "requests==2.34.2",
+    "sphinx==9.1.0",
+    "sphinx-copybutton==0.5.2",
+    "sphinx-design==0.7.0",
+    "sphinxcontrib-bibtex==2.7.0",
+    "sphobjinv==2.4",
+]
+export = [
+    "onnx==1.22.0",
+    "onnxruntime==1.27.0",
+    "onnxscript==0.7.0",
+    "onnxsim==0.6.5",
+]
