@@ -93,7 +93,8 @@ docs = [
 ]
 export = [
     "onnx==1.22.0",
-    "onnxruntime==1.27.0",
+    "onnxruntime-gpu==1.26.0",
     "onnxscript==0.7.0",
     "onnxsim==0.6.5",
+    "opencv-python==4.13.0.92",
 ]

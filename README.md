@@ -86,7 +86,7 @@ You can create a virtual environment for your packages via [venv](https://docs.p
 
 ```bash
 conda create -n glasses-detector python=3.12
-conda activate glasses-detector 
+conda activate glasses-detector
 ```
 
 > To set-up the datasets, refer to **[Data](https://github.com/mantasu/glasses-detector?tab=readme-ov-file#data)** section.
@@ -141,6 +141,53 @@ glasses-detector -i demo -o demo_labels.csv --task classification:eyeglasses
 
 You can also check out the [demo notebook](https://github.com/mantasu/glasses-detector/notebooks/demo.ipynb) which can be also accessed via [Google Colab](https://colab.research.google.com/github/mantasu/glasses-detector/blob/master/notebooks/demo.ipynb).
 
+#### Head Crop + Sunglasses ONNX Demo
+
+This repository also includes a local ONNX demo that detects `Head` boxes with the YOLO wholebody model, crops each head region, and prints or visualizes the sunglasses score from the sunglasses classifier.
+
+First install the export dependencies and generate the ONNX files:
+
+```bash
+uv sync --group export
+uv run python scripts/export_onnx.py
+```
+
+Run it on one or more images:
+
+```bash
+uv run python demo/demo_classification_sunglasses.py data/demo/0.jpg
+uv run python demo/demo_classification_sunglasses.py data/demo/*.jpg
+```
+
+Image mode prints CSV-style rows:
+
+```text
+image,head_index,head_score,sunglasses_logit,sunglasses_score,x1,y1,x2,y2
+```
+
+Run the real-time USB camera demo:
+
+```bash
+uv run --group export python demo/demo_classification_sunglasses.py --camera 0
+```
+
+Camera mode requests `640x480` input by default, draws the head boxes and sunglasses scores in an OpenCV window, and automatically records the visualized frames to `demo/recordings/camera_<index>_<timestamp>.mp4`. Press `q` or `ESC` to quit.
+
+Useful options:
+
+```bash
+# Choose ONNX Runtime backend: cuda is the default; cpu and tensorrt are also available.
+uv run python demo/demo_classification_sunglasses.py --backend cpu data/demo/0.jpg
+uv run python demo/demo_classification_sunglasses.py --camera 0 --backend tensorrt
+
+# Override camera resolution or recording path.
+uv run python demo/demo_classification_sunglasses.py --camera 0 --camera-width 1280 --camera-height 720
+uv run python demo/demo_classification_sunglasses.py --camera 0 --record-output outputs/sunglasses_demo.mp4
+
+# Mirror webcam frames before inference and visualization.
+uv run python demo/demo_classification_sunglasses.py --camera 0 --mirror
+```
+
 ## Data
 
 Before downloading the datasets, please install `unrar` package, for example if you're using Ubuntu (if you're using Windows, just install [WinRAR](https://www.win-rar.com/start.html?&L=0)):
@@ -172,10 +219,10 @@ After processing all the datasets, your `data` directory should have the followi
     │   ├── anyglasses      # Datasets with any glasses as positives
     │   ├── eyeglasses      # Datasets with transparent glasses as positives
     │   ├── shadows         # Datasets with visible glasses frames shadows as positives
-    │   └── sunglasses      # Datasets with semi-transparent/opaque glasses as positives 
+    │   └── sunglasses      # Datasets with semi-transparent/opaque glasses as positives
     │
     ├── detection
-    │   ├── eyes            # Datasets with bounding boxes for eye area 
+    │   ├── eyes            # Datasets with bounding boxes for eye area
     │   ├── solo            # Datasets with bounding boxes for standalone glasses
     │   └── worn            # Datasets with bounding boxes for worn glasses
     │
@@ -276,7 +323,7 @@ To run custom training and testing, it is first advised to familiarize with how 
 
 You can run simple training as follows (which is the default):
 ```bash
-python scripts/run.py fit --task classification:anyglasses --size medium 
+python scripts/run.py fit --task classification:anyglasses --size medium
 ```
 
 You can customize things like `batch-size`, `num-workers`, as well as `trainer` and `checkpoint` arguments:

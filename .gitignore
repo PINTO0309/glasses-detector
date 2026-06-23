@@ -20,3 +20,4 @@ _build
 _templates
 __pycache__
 *.egg-info
+*.mp4
